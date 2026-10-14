@@ -46,6 +46,11 @@
 
     //using array_slice() function to get a portion of an array
     $slicedCars = array_slice($uniqueCars, 2, 3);
+    /*
+    start index = 2
+    Next 3 elements will be sliced from the array
+    means index 2, 3, 4 elements will be sliced from the array
+    */
     echo"<br>";
     foreach($slicedCars as $car) {
         echo $car . "<br>";
