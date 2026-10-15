@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>UIU261</title>
 </head>
 <body>
 
@@ -33,10 +33,12 @@
 </html>
 
 <?php
-    
-    $infoTable = array();
+    session_start();
 
-    if(isset($_POST["submit"])) {
+    if(!isset($_POST["submit"])) {
+        $_SESSION["infoTable"] = array();
+    }
+    elseif(isset($_POST["submit"])) {
     $cpc = (int)($_POST["creditpercourse"]);
     $comCourse = (int)($_POST["completedcourses"]);
     $trgCredit = (int)($_POST["targetcredits"]);
@@ -70,7 +72,14 @@
         $resultStatus = "Bellow target by $diff";
     }
 
-    array_push($infoTable, array($cpc, $comCourse, $trgCredit, $totalCredit, $progressStatus, $resultStatus));
+    array_push($_SESSION["infoTable"], array(
+        $cpc, 
+        $comCourse, 
+        $trgCredit, 
+        $totalCredit, 
+        $progressStatus, 
+        $resultStatus
+    ));
 
     echo "<table border='1'>";
     echo "<tr>";
@@ -82,7 +91,7 @@
     echo "<th>Result</th>";
     echo "</tr>";
 
-    foreach($infoTable as $info) {
+    foreach($_SESSION["infoTable"] as $info) {
         echo"<tr>";
 
             foreach($info as $data) {
